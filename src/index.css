@@ -112,10 +112,6 @@ body {
   color: var(--text);
 }
 
-.extras_text {
-  /* margin-top: -200px; */
-}
-
 .extras_text h1 {
   font-size: 36px;
   line-height: 130%;
