@@ -42,7 +42,7 @@ const Extras = () => {
         ease: "easeInOut",
         }}
       >
-        <img className="w-200" src={Image3} alt="" />
+        <img className="w-300" src={Image3} alt="" />
       </motion.div>
       <motion.div
         className="extras_img"
@@ -58,7 +58,7 @@ const Extras = () => {
         delay: 1,
         }}
       >
-        <img className="w-200" src={Image1} alt="" />
+        <img className="w-300" src={Image1} alt="" />
       </motion.div>
       <motion.div
         className="extras_img mt-20"
@@ -74,7 +74,7 @@ const Extras = () => {
         delay: 2,
         }}
       >
-        <img className="w-200" src={Image2} alt="" />
+        <img className="w-300" src={Image2} alt="" />
       </motion.div>
     </motion.div>
 
