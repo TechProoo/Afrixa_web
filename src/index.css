@@ -13,6 +13,10 @@ body {
   font-family: "Playfair Display", serif;
 }
 
+::-webkit-scrollbar {
+  display: hidden;
+}
+
 .hero_container {
   position: relative;
 }
