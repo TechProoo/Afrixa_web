@@ -1,12 +1,12 @@
 import App_store from "../assets/Vector.png";
 import Play_store from "../assets/logos_google-play-icon.png";
-import Phone from "../assets/Chat page 13.png";
 import { motion } from "framer-motion";
+import Phone from "./Phone";
 
 const Hero = () => {
   return (
     <motion.div
-      className="mt-15 hero_container"
+      className="hero_container min-h-screen text-white flex flex-col items-center justify-center px-4 py-10 md:py-20 text-center"
       initial="hidden"
       animate="visible"
       variants={{
@@ -14,60 +14,54 @@ const Hero = () => {
         visible: { transition: { staggerChildren: 0.2 } },
       }}
     >
+      {/* Text Section */}
       <motion.div
         className="hero_text"
-        initial={{ opacity: 0, y: -50 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-[55px] md:text-[70px] font-bold leading-tight">
+        <h1 className="text-[40px] sm:text-[40px] md:text-[60px] font-extrabold leading-tight text-green-400">
           One App.
         </h1>
-        <h1 className="text-[55px] md:text-[70px] font-bold leading-tight mt-2">
-          A Million Possibilities.
-        </h1>
-        <p className="mt-6 md:mt-10 text-base md:text-lg max-w-md md:max-w-xl mx-auto text-center">
+        <h1 className="sm:block md:text-[60px] text-[40px]">A Million Possibilities.</h1>
+        <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-200 max-w-xl mx-auto">
           Simplify life with chat, commerce, and payments — all in one app.
         </p>
       </motion.div>
 
+      {/* Store Buttons */}
       <motion.div
-        className="hero_link flex flex-col md:flex-row items-center justify-center mt-10"
-        initial={{ opacity: 0, y: 20 }}
+        className="hero_link flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto items-center justify-center"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="flex flex-col md:flex-row gap-4 md:gap-5 w-full md:w-auto">
-          <motion.button
-        className="flex items-center gap-2 px-4 py-2 rounded-md bg-white shadow hover:bg-gray-100 transition text-base md:text-lg w-full md:w-auto justify-center"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-          >
-        <img src={App_store} alt="App Store" className="h-6 w-6" />
-        <span>App Store</span>
-          </motion.button>
+        <button className="flex items-center gap-2 px-5 py-3 rounded-md bg-white text-black shadow-md hover:bg-gray-100 transition w-full sm:w-auto justify-center">
+          <img src={App_store} alt="App Store" className="h-6 w-6" />
+          <span>App Store</span>
+        </button>
+        <button className="flex items-center gap-2 px-5 py-3 rounded-md bg-white text-black shadow-md hover:bg-gray-100 transition w-full sm:w-auto justify-center">
+          <img src={Play_store} alt="Play Store" className="h-6 w-6" />
+          <span>Play Store</span>
+        </button>
+      </motion.div>
 
-          <motion.button
-        className="flex items-center gap-2 px-4 py-2 rounded-md bg-white shadow hover:bg-gray-100 transition text-base md:text-lg w-full md:w-auto justify-center"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-          >
-        <img src={Play_store} alt="Play Store" className="h-6 w-6" />
-        <span>Play Store</span>
-          </motion.button>
+      {/* Phone with Glow */}
+      <motion.div
+        className="relative mt-16 w-full flex justify-center ml-[-130px] md:ml-0"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        {/* Glow Effect */}
+        <div className="absolute inset-4 rounded-[60px] blur-3xl bg-green-500 opacity-30 z-0" />
+
+        {/* Phone Component */}
+        <div className="relative z-10 w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px]">
+          <Phone />
         </div>
       </motion.div>
-
-      <motion.div
-        className="hero_pic flex justify-center mt-10"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      >
-        <img src={Phone} className="h-[650px]" alt="" />
-      </motion.div>
-
-      <div className="hero_bg"></div>
     </motion.div>
   );
 };
