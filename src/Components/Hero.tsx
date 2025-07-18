@@ -49,13 +49,13 @@ const Hero = () => {
 
       {/* Phone with Glow */}
       <motion.div
-        className="relative md:mt-16 mt-1 w-full flex justify-center ml-[-160px] scale-75 md:ml-0"
+        className="relative md:mt-16 mt-1 w-full flex justify-center ml-[-160px] md:scale-100 scale-75 md:ml-0"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
         {/* Glow Effect */}
-        <div className="absolute inset-4 rounded-[60px] blur-3xl bg-green-500 opacity-30 z-0" />
+        <div className="absolute inset-4 rounded-[60px] blur-3xl bg-green-500 opacity-10 z-0" />
 
         {/* Phone Component */}
         <div className="relative z-10 w-[200px] sm:w-[300px] md:w-[350px] lg:w-[400px]">

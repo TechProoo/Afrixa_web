@@ -1,7 +1,10 @@
 import Frame from "../assets/471_component.png";
 import { Search, MoreVertical, Plus } from "lucide-react";
-
+import App_store from "../assets/Vector.png";
+import Play_store from "../assets/logos_google-play-icon.png";
+import { motion } from "framer-motion";
 import { MessageCircle, BarChart2, Play, Grid, User } from "lucide-react"; // or any icon set of your choice
+import { useState } from "react";
 
 const bottomTabs = [
   { label: "Chats", icon: <MessageCircle className="w-5 h-5" /> },
@@ -12,6 +15,25 @@ const bottomTabs = [
 ];
 
 const Phone = () => {
+  const [activeTab, setActiveTab] = useState("Chats");
+  const [showModal, setShowModal] = useState(false);
+
+  const [seenStories, setSeenStories] = useState<string[]>([]);
+  const stories = [
+    { name: "Sammy...", img: "https://i.pravatar.cc/100?img=1" },
+    { name: "Jane Lee", img: "https://i.pravatar.cc/100?img=2" },
+    { name: "Georgina", img: "https://i.pravatar.cc/100?img=3" },
+    { name: "Joseph", img: "https://i.pravatar.cc/100?img=4" },
+    { name: "Joel", img: "https://i.pravatar.cc/100?img=5" },
+  ];
+
+  const handleStoryClick = (name: string) => {
+    if (!seenStories.includes(name)) {
+      setSeenStories((prev) => [...prev, name]);
+    }
+    setShowModal(true);
+  };
+
   const chatData = [
     {
       name: "George Simmons",
@@ -173,29 +195,30 @@ const Phone = () => {
           </div>
 
           {/* Stories Row */}
-          <div className="flex space-x-4 overflow-x-auto px-4 pb-3 mt-1">
-            {[
-              { name: "Sammy...", img: "https://i.pravatar.cc/100?img=1" },
-              { name: "Jane Lee", img: "https://i.pravatar.cc/100?img=2" },
-              { name: "Georgina", img: "https://i.pravatar.cc/100?img=3" },
-              { name: "Joseph", img: "https://i.pravatar.cc/100?img=4" },
-              { name: "Joel", img: "https://i.pravatar.cc/100?img=5" },
-            ].map((user, i) => (
-              <div
+          <div className="flex space-x-4 overflow-x-auto px-4 pb-3 mt-1 no-scrollbar">
+            {stories.map((user, i) => (
+              <button
                 key={i}
-                className="flex flex-col items-center text-center w-14"
+                onClick={() => handleStoryClick(user.name)}
+                className="flex flex-col items-center text-center w-14 focus:outline-none group"
               >
-                <div className="w-12 h-12 rounded-full border-[2.5px] border-[#0E3FE2] p-[2px]">
+                <div
+                  className={`w-12 h-12 rounded-full border-[2.5px] p-[2px] ${
+                    seenStories.includes(user.name)
+                      ? "border-gray-300"
+                      : "border-[#0E3FE2]"
+                  }`}
+                >
                   <img
                     src={user.img}
                     alt={user.name}
-                    className="rounded-full w-full h-full object-cover"
+                    className="rounded-full w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                   />
                 </div>
                 <span className="text-xs mt-1 truncate text-[#4F2820]">
                   {user.name}
                 </span>
-              </div>
+              </button>
             ))}
           </div>
 
@@ -283,28 +306,30 @@ const Phone = () => {
 
         {/* Bottom Navigation */}
         <div className="absolute bottom-0 left-0 w-full h-16 bg-white p-3 border-t flex justify-around items-center text-xs">
-          {bottomTabs.map((tab, i) => {
-            const isActive = i === 0; // simulate "Chats" as active
+          {bottomTabs.map((tab) => {
+            const isActive = activeTab === tab.label;
+
             return (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center "
+              <button
+                key={tab.label}
+                onClick={() => setActiveTab(tab.label)}
+                className="flex flex-col items-center justify-center focus:outline-none"
               >
                 <div
                   className={`mb-1 ${
-                    isActive ? "text-[#000000]" : "text-[#7C7C7C]"
+                    isActive ? "text-black" : "text-[#7C7C7C]"
                   }`}
                 >
                   {tab.icon}
                 </div>
                 <span
                   className={`${
-                    isActive ? "text-[#000000] font-semibold" : "text-[#7C7C7C]"
+                    isActive ? "text-black font-semibold" : "text-[#7C7C7C]"
                   }`}
                 >
                   {tab.label}
                 </span>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -316,6 +341,46 @@ const Phone = () => {
         alt="Phone Frame"
         className="absolute inset-0 w-full h-full object-contain z-20 pointer-events-none"
       />
+
+      {showModal && (
+        <div className="absolute top-0 left-0 w-full h-full bg-opacity-40 flex items-center justify-center z-30">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-2xl shadow-xl w-[90%] max-w-[320px] p-6 text-center relative"
+          >
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl"
+            >
+              ×
+            </button>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Download Now
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Get the full experience on mobile
+            </p>
+            <motion.div
+              className="hero_link flex flex-col gap-4 mt-8 w-full sm:w-auto items-center justify-center"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <button className="flex items-center gap-2 px-5 py-3 rounded-md bg-white text-black shadow-md hover:bg-gray-100 transition w-full sm:w-auto justify-center">
+                <img src={App_store} alt="App Store" className="h-6 w-6" />
+                <span>App Store</span>
+              </button>
+              <button className="flex items-center gap-2 px-5 py-3 rounded-md bg-white text-black shadow-md hover:bg-gray-100 transition w-full sm:w-auto justify-center">
+                <img src={Play_store} alt="Play Store" className="h-6 w-6" />
+                <span>Play Store</span>
+              </button>
+            </motion.div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
